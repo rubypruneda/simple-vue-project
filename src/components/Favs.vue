@@ -4,7 +4,7 @@
       <ul>
         <li v-for="(info, i) in favs" :key="i">{{i}}. {{info.favorite}}</li>
       </ul>
-      <div v-bind:class="{alert: showAlert, 'classes': showClasses}"></div>
+      <p>Here are you favorites!</p>
     </div>
   </div>
 </template>
@@ -26,14 +26,33 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style >
-.alert {
-  width: 100%;
-  height: 30px;
-  background-color: pink;
-}
+<style scoped>
+.holder {
+    background: #fff;
+  }
 
-.classes {
-  border: 5px solid yellow;
-}
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  ul li {
+    padding: 20px;
+    font-size: 1.3em;
+    background-color: #99e6ff;
+    border-left: 5px solid #80b3ff;
+    margin-bottom: 2px;
+    color: black;
+  }
+
+  p {
+    text-align:center;
+    padding: 30px 0;
+    color: gray;
+  }
+
+  .container {
+    box-shadow: 0px 0px 40px lightgray;
+  }
 </style>
