@@ -2,9 +2,9 @@
   <div class="hello">
     <div class='holder'>
     <form @submit.prevent="addFav">
-      <input type="text" placeholder="Enter your favorite.."  v-model="fav">
+      <input type="text" placeholder="Enter your favorite.."  v-model="fav" v-validate = "'min:3'" name = 'favorite'>
+      <p class = 'alert' v-if="errors.has('favorite')">{{ errors.first('favorite')}}</p>
     </form>
-    <p>{{fav}}</p>
       <ul>
         <li v-for="(info, i) in favs" :key="i"> {{info.fav}}</li>
       </ul>
@@ -27,8 +27,15 @@ export default {
   },
   methods : {
       addFav(){
-          this.favs.push({fav: this.fav});
-          this.fav = '';
+        this.$validator.validateAll().then(result => {
+          if(result) {
+            this.favs.push({fav: this.fav});
+            this.fav = '';
+          } {
+            console.log('Not valid. Sorry!')
+          }
+        })
+         
       }
   }
 }
