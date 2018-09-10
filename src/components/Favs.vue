@@ -2,11 +2,15 @@
   <div class="hello">
     <div class='holder'>
     <form @submit.prevent="addFav">
-      <input type="text" placeholder="Enter your favorite.."  v-model="fav" v-validate = "'min:3'" name = 'favorite'>
+      <input type="text" placeholder="Enter your favorite.. Anything!"  v-model="fav" v-validate = "'min:3'" name = 'favorite'>
       <p class = 'alert' v-if="errors.has('favorite')">{{ errors.first('favorite')}}</p>
     </form>
       <ul>
-        <li v-for="(info, i) in favs" :key="i"> {{info.fav}}</li>
+        <transition-group name='what' enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+          <li v-for="(info, index) in favs" :key="index"> {{info.fav}}
+            <i class='fa fa-minus-circle' v-on:click="remove(index)"></i>
+          </li>
+        </transition-group>
       </ul>
       <p>Here are you favorites!</p>
     </div>
@@ -31,11 +35,13 @@ export default {
           if(result) {
             this.favs.push({fav: this.fav});
             this.fav = '';
-          } {
+          } else {
             console.log('Not valid. Sorry!')
           }
-        })
-         
+        })  
+      },
+      remove(id) {
+        this.favs.splice(id,1)
       }
   }
 }
@@ -43,6 +49,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; 
 input {
     width: calc(100% - 40px);
     border: 0;
@@ -79,5 +87,9 @@ input {
 
   .container {
     box-shadow: 0px 0px 40px lightgray;
+  }
+
+  i {
+    float: right;
   }
 </style>
