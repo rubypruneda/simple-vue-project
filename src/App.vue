@@ -3,6 +3,7 @@
     <nav>
     <router-link to = '/' >Home</router-link>
     <router-link to = '/new' >New</router-link>
+    <router-link to = '/ruby'>Ruby</router-link>
     </nav>
     <router-view/>
   </div>
