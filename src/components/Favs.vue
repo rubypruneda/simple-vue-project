@@ -24,8 +24,7 @@ export default {
     return {
       fav: '',
      favs: [
-       {'fav': 'Family'},
-       {'fav': 'Pizza'}
+       
      ]
     }
   },
